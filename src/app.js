@@ -6,7 +6,7 @@ const app = express();
 const PORT = 3000;
 
 app.get("/", (req, res) => {
-  res.send("Server Running");
+  res.send("Server Running Namaste Node.JS");
 });
 
 app.listen(PORT, () => {
