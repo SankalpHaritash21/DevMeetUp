@@ -11,7 +11,7 @@ What I Did.
 7. What is nodemon.
 8. Diff between caret and tilde ( ^ vs ~)
 9. What is the use of '-g' while npm install
-10.
+10. Sequence/Order of route also matter a lot.
 11.
 12.
 13.
