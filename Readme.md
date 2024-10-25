@@ -22,7 +22,7 @@ What I Did.
     })
     })
     }
-13. Explored routing and the use of ?, +, (), \* in the rotes.
+13. Explored routing and the use of ?, +, (), \,\* in the rotes.
 14. Reading the query params in the routes.
 15. Reading the dynamic routes.
 16.
