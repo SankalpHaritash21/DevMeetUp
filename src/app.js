@@ -11,26 +11,11 @@ const corsOptions = {
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 const ConnectDB = require("./config/database");
-const User = require("./models/user");
+const { addUser } = require("./controller/controller");
 app.use(cors(corsOptions));
+app.use(express.json());
 
-app.post("/signup", async (req, res, next) => {
-  try {
-    const user = new User({
-      firstName: "Sam",
-      lastName: "1",
-      emailId: "Sam@gmail.com",
-      password: "Sam@1234",
-      age: 21,
-      gender: "male",
-    });
-    await user.save();
-    res.status(201).send("user added Successfully");
-  } catch (err) {
-    console.log(err);
-    res.status(500).send("Internal Server Error");
-  }
-});
+app.post("/signup", addUser);
 
 ConnectDB()
   .then(() => {

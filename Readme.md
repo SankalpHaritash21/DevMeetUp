@@ -45,8 +45,8 @@ What I Did.
 29. Create user Schema and user Model.
 30. create /signup API to add data to database.
 31. Made API calls from Postman to store them in databases.
-32.
-33.
+32. Diff between JS Object and Json Object
+33. Made request from signup API and make dynamic data to store in database
 34.
 35.
 36.
