@@ -1,4 +1,4 @@
-Sankalp Haritash
+# What I did in DevTinder?
 
 What I Did.
 
@@ -38,9 +38,32 @@ What I Did.
 22. Diff between app.use and app.all?
 23. write a dummy middleware for admin.
 24. write a dummy middleware for user.
-25. Error Handling using app.use('/',(err, req, res, next)=>{})
-26.
-27.
-28.
-29.
-30.
+25. Error Handling using app.use('/',(err, req, res, next)=>{}).
+26. Create Cluster at MongoDB Cluster.
+27. Connect Project to MongoDB Database.
+28. Call the connectDB function and connect the database before starting application on 8000
+29. Create user Schema and user Model.
+30. create /signup API to add data to database.
+31. Made API calls from Postman to store them in databases.
+32.
+33.
+34.
+35.
+36.
+37.
+38.
+39.
+40.
+
+## Todo:
+
+1. Add user image
+2.
+3.
+4.
+5.
+6.
+7.
+8.
+9.
+10.
