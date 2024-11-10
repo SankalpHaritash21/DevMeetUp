@@ -3,7 +3,7 @@ console.log("Dev Tinder Backend File");
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const AdminAuth = require("./middleware/middleware");
+// const AdminAuth = require("./middleware/middleware");
 require("dotenv").config();
 const PORT = process.env.PORT || 3000;
 const corsOptions = {
