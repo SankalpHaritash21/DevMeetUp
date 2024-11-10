@@ -14,16 +14,20 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// Handle Auth Middleware for only Get request
+app.get("/", (req, res) => {
+  // try {
+  //   res.send("Welcome to Dev Tinder Backend");
+  // } catch (error) {
+  //   console.error(error);
+  // }
 
-app.use("/admin", AdminAuth);
-
-app.use("/admin/getAllData", (req, res, nest) => {
-  //check logic if user is Authorized
-  console.log("Admin Data Access");
-  res.status(200).send("Admin Data Access Granted");
+  throw new Error("Something went wrong");
+  res.send("Welcome to Dev Tinder Backend");
 });
-require("../connection/db");
+
+app.use("/", (err, req, res, next) => {
+  if (err) res.status(500).send("Something went wrong");
+});
 
 app.listen(PORT, () => {
   console.log(`App is running on PORT ${PORT}`);
