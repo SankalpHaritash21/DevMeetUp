@@ -36,9 +36,9 @@ What I Did.
 20. What is Middleware? why do we need it?
 21. How express js basically handles request behind the scenes
 22. Diff between app.use and app.all?
-23. write a dummy middleware
-24.
-25.
+23. write a dummy middleware for admin.
+24. write a dummy middleware for user.
+25. Error Handling using app.use('/',(err, req, res, next)=>{})
 26.
 27.
 28.
