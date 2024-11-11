@@ -11,11 +11,21 @@ const corsOptions = {
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 const ConnectDB = require("./config/database");
-const { addUser } = require("./controller/controller");
+const {
+  addUser,
+  getUser,
+  getAllUser,
+  deleteUser,
+  updateUser,
+} = require("./controller/controller");
 app.use(cors(corsOptions));
 app.use(express.json());
 
 app.post("/signup", addUser);
+app.get("/getuser", getUser);
+app.get("/getAllUser", getAllUser);
+app.get("/deleteUser", deleteUser);
+app.patch("/updateUser", updateUser);
 
 ConnectDB()
   .then(() => {
