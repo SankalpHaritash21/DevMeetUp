@@ -26,6 +26,11 @@ const getAllUser = async (req, res, next) => {
 const addUser = async (req, res, next) => {
   console.log(req.body);
   try {
+    const existingUser = await User.findOne({ emailId: req.body?.emailId });
+    if (existingUser) {
+      return res.status(400).send("User Already Exists");
+    }
+
     const user = new User({
       firstName: req.body?.firstName,
       lastName: req.body?.lastName,
@@ -34,16 +39,16 @@ const addUser = async (req, res, next) => {
       age: req.body?.age,
       gender: req.body?.gender,
     });
-    if (User.findOne({ emailId: req.body?.emailId })) {
-      return res.status(400).send("User Already Exists");
-    }
+
     await user.save();
-    res.status(201).send("user added Successfully");
+    res.status(201).send("User added successfully");
   } catch (err) {
     console.log(err);
     res.status(500).send("Internal Server Error");
   }
 };
+
+module.exports = { addUser };
 
 const deleteUser = async (req, res, next) => {
   console.log(req.body);
@@ -63,7 +68,24 @@ const updateUser = async (req, res, next) => {
   const id = req.body?._id;
   const updateData = req.body;
   try {
-    const users = await User.findByIdAndUpdate({ _id: id }, updateData);
+    const users = await User.findByIdAndUpdate({ _id: id }, updateData, {
+      returnDocument: "after",
+      runValidators: true,
+    });
+
+    res.status(200).json(users);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+const updateUserByEmail = async (req, res, next) => {
+  console.log(req.body);
+  const email = req.body?.emailId;
+  const updateData = req.body;
+  try {
+    const users = await User.findByIdAndUpdate({ emailId: email }, updateData);
 
     res.status(200).json(users);
   } catch (err) {

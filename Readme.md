@@ -54,13 +54,13 @@ What I Did.
 38. create delete user- API
 39. Diff. between Patch and PUT
 40. API- Created Update user API using moongoose model.
-41.
-42.
-43.
-44.
-45.
-46.
-47.
+41. What r options in Model.findOneAndUpdate method, explore more about it.
+42. Created Update user ApI which update User with Email.id
+43. Explore schematype options from docs
+44. added required, unique, lowercase, enum, minLength, maxLength, min, default, trim, custom validator function in user Schema.
+45. Custom check on gender.
+46. Improved the DB schema - put all appropriate validation on each field.
+47. Added time stamps to the userSchema.
 48.
 49.
 50.
