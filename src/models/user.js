@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const validator = require("validator");
 const { Schema } = mongoose;
 
 const userSchema = new Schema(
@@ -19,11 +20,20 @@ const userSchema = new Schema(
       required: true,
       trim: true,
       lowercase: true,
+      validate(value) {
+        if (!validator.isEmail(value))
+          throw new Error("Invalid Email Format:" + value);
+      },
     },
     password: {
       type: String,
       required: true,
       minLength: 6,
+      validate(value) {
+        if (!validator.isStrongPassword(value)) {
+          throw new Error("Enter a Strong Password: " + value);
+        }
+      },
     },
     age: {
       type: Number,
@@ -43,6 +53,11 @@ const userSchema = new Schema(
       type: String,
       default:
         "https://www.inforwaves.com/media/2021/04/dummy-profile-pic-300x300-1.png",
+      validate(value) {
+        if (!validator.isURL(value)) {
+          throw new Error("Invalid Photo URL: " + value);
+        }
+      },
     },
     about: {
       type: String,

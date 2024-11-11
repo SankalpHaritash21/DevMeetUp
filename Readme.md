@@ -63,7 +63,7 @@ What I Did.
 47. Added time stamps to the userSchema.
 48. Add API level validation on Patch request & signup put API
 49. Data Sanitization Add API validation For Each Field.
-50.
+50. Installed Vlidator function and explore validator libarary function for email, password, photoUrl.
 51.
 52.
 53.
