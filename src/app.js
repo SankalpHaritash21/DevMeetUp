@@ -13,19 +13,21 @@ const corsOptions = {
 const ConnectDB = require("./config/database");
 const {
   addUser,
-  getUser,
   getAllUser,
   deleteUser,
   updateUser,
+  updateUserByEmail,
+  getUserByEmail,
 } = require("./controller/controller");
 app.use(cors(corsOptions));
 app.use(express.json());
 
 app.post("/signup", addUser);
-app.get("/getuser", getUser);
+app.get("/getuser", getUserByEmail);
 app.get("/getAllUser", getAllUser);
 app.get("/deleteUser", deleteUser);
-app.patch("/updateUser", updateUser);
+app.patch("/updateUser/:userId", updateUser);
+app.patch("/updateUserByEmail", updateUserByEmail);
 
 ConnectDB()
   .then(() => {

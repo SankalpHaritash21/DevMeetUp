@@ -61,14 +61,29 @@ What I Did.
 45. Custom check on gender.
 46. Improved the DB schema - put all appropriate validation on each field.
 47. Added time stamps to the userSchema.
-48.
-49.
+48. Add API level validation on Patch request & signup put API
+49. Data Sanitization Add API validation For Each Field.
 50.
 51.
 52.
 53.
 54.
 55.
+56.
+57.
+58.
+59.
+60.
+61.
+62.
+63.
+64.
+65.
+66.
+67.
+68.
+69.
+70.
 
 ## Todo:
 

@@ -50,6 +50,17 @@ const userSchema = new Schema(
     },
     skills: {
       type: [String],
+      validate: {
+        validator: function (value) {
+          return (
+            Array.isArray(value) &&
+            value.length > 0 &&
+            value.every((item) => typeof item === "string") &&
+            new Set(value).size === value.length
+          );
+        },
+        message: "Skills must be a non-empty array of unique strings.",
+      },
     },
   },
   { timestamps: true }
