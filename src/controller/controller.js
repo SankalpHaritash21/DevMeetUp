@@ -1,4 +1,8 @@
 const User = require("../models/user");
+const { validateSignupData } = require("../utils/request");
+const bcrypt = require("bcrypt");
+const validator = require("validator");
+require("dotenv").config();
 
 const getUserByEmail = async (req, res, next) => {
   const userEmail = req.body?.emailId;
@@ -9,6 +13,31 @@ const getUserByEmail = async (req, res, next) => {
   } catch (err) {
     console.log(err);
     res.status(500).send("Internal Server Error");
+  }
+};
+
+const loginUser = async (req, res, next) => {
+  try {
+    const { emailId, password } = req.body;
+
+    // Validate `emailId` format
+    if (!validator.isEmail(emailId)) {
+      throw new Error("Invalid email format.");
+    }
+    const user = await User.findOne({ emailId });
+    if (!user) {
+      throw new Error("Invalid Credentials");
+    }
+
+    const isPasswordCorrect = bcrypt.compare(password, user.password);
+    if (!isPasswordCorrect) {
+      throw new Error("Invalid Credentials");
+    } else {
+      res.status(200).send("Login Successfull");
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Error:" + err.message);
   }
 };
 
@@ -26,6 +55,9 @@ const getAllUser = async (req, res, next) => {
 const addUser = async (req, res, next) => {
   console.log(req.body);
   try {
+    validateSignupData(req);
+
+    // check user already exists
     const existingUser = await User.findOne({ emailId: req.body?.emailId });
     if (existingUser) {
       return res.status(400).send("User Already Exists");
@@ -38,75 +70,20 @@ const addUser = async (req, res, next) => {
       password,
       age,
       gender,
-      skills = [],
+      skills,
       about,
       photoUrl,
     } = req.body;
 
-    // Validate `firstName` and `lastName`
-    if (!firstName || firstName.length < 3 || firstName.length > 20) {
-      return res
-        .status(400)
-        .send("First name must be between 3 and 20 characters.");
-    }
-    if (!lastName) {
-      return res.status(400).send("Last name is required.");
-    }
+    //create Password Hash
 
-    // Validate `emailId` format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(emailId)) {
-      return res.status(400).send("Invalid email format.");
-    }
-
-    // Validate `password` strength
-    if (!password || password.length < 6) {
-      return res
-        .status(400)
-        .send("Password must be at least 6 characters long.");
-    }
-
-    // Validate `age`
-    if (!Number.isInteger(age) || age < 18) {
-      return res
-        .status(400)
-        .send("Age must be a valid integer and at least 18.");
-    }
-
-    // Validate `gender`
-    const allowedGenders = ["male", "female", "other"];
-    if (!allowedGenders.includes(gender)) {
-      return res.status(400).send("Invalid gender type.");
-    }
-
-    // Validate `skills` array
-    if (
-      !Array.isArray(skills) ||
-      !skills.every((item) => typeof item === "string")
-    ) {
-      return res.status(400).send("Skills must be an array of strings.");
-    }
-    if (new Set(skills).size !== skills.length) {
-      return res.status(400).send("Skills array must contain unique values.");
-    }
-
-    // const user = new User({
-    //   firstName: firstName,
-    //   lastName: lastName,
-    //   emailId: emailId,
-    //   password: password,
-    //   age: age,
-    //   gender: gender,
-    //   skills: skills,
-    //   about: about,
-    //   photoUrl: photoUrl,
-    // });
+    const passwordHash = await bcrypt.hash(password, 10);
 
     const user = new User({
       firstName,
       lastName,
       emailId,
-      password,
+      password: passwordHash,
       age,
       gender,
       skills,
@@ -117,7 +94,7 @@ const addUser = async (req, res, next) => {
     res.status(201).send("User added successfully");
   } catch (err) {
     console.log(err);
-    res.status(500).send("Internal Server Error");
+    res.status(500).send("Error:" + err.message);
   }
 };
 
@@ -234,6 +211,7 @@ const updateUserByEmail = async (req, res, next) => {
 
 module.exports = {
   addUser,
+  loginUser,
   getUserByEmail,
   getAllUser,
   deleteUser,

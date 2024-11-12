@@ -64,11 +64,11 @@ What I Did.
 48. Add API level validation on Patch request & signup put API
 49. Data Sanitization Add API validation For Each Field.
 50. Installed Vlidator function and explore validator libarary function for email, password, photoUrl.
-51.
-52.
-53.
-54.
-55.
+51. Validate data in Signup API.
+52. Install Bcrypt pkg.
+53. Create Password hash using bcrypt.hash and save user incrypted password.
+54. Create login Api.
+55. Compare Password and throw error if email or password is invalid.
 56.
 57.
 58.

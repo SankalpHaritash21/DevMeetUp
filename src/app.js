@@ -18,11 +18,13 @@ const {
   updateUser,
   updateUserByEmail,
   getUserByEmail,
+  loginUser,
 } = require("./controller/controller");
 app.use(cors(corsOptions));
 app.use(express.json());
 
 app.post("/signup", addUser);
+app.post("/login", loginUser);
 app.get("/getuser", getUserByEmail);
 app.get("/getAllUser", getAllUser);
 app.get("/deleteUser", deleteUser);
