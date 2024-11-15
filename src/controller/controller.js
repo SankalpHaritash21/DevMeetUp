@@ -3,6 +3,7 @@ const { validateSignupData } = require("../utils/request");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
 require("dotenv").config();
+const jwt = require("jsonwebtoken");
 
 const getUserByEmail = async (req, res, next) => {
   const userEmail = req.body?.emailId;
@@ -29,15 +30,34 @@ const loginUser = async (req, res, next) => {
       throw new Error("Invalid Credentials");
     }
 
-    const isPasswordCorrect = bcrypt.compare(password, user.password);
+    const token = await user.getJwt();
+    console.log(token);
+    const isPasswordCorrect = await user.validatePassword(password);
     if (!isPasswordCorrect) {
       throw new Error("Invalid Credentials");
     } else {
+      res.cookie("token", token, {
+        expires: new Date(Date.now() + 8 * 3600000),
+      });
       res.status(200).send("Login Successfull");
     }
   } catch (err) {
     console.log(err);
     res.status(500).send("Error:" + err.message);
+  }
+};
+
+const userProfile = async (req, res, next) => {
+  try {
+    const user = req?.user;
+    if (!user) {
+      throw new Error("User Not Exist");
+    }
+
+    res.send("Logged in User: " + user);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send("Internal Server Error", error.message);
   }
 };
 
@@ -209,12 +229,24 @@ const updateUserByEmail = async (req, res, next) => {
   }
 };
 
+const sendConnectionRequest = async (req, res) => {
+  try {
+    const user = req?.user;
+    console.log("Send Connection Request");
+    res.status(200).send(user?.firstName + "Connection Request Sent");
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
 module.exports = {
   addUser,
   loginUser,
-  getUserByEmail,
   getAllUser,
   deleteUser,
   updateUser,
+  userProfile,
+  getUserByEmail,
   updateUserByEmail,
+  sendConnectionRequest,
 };

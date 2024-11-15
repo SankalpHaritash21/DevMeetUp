@@ -69,21 +69,41 @@ What I Did.
 53. Create Password hash using bcrypt.hash and save user incrypted password.
 54. Create login Api.
 55. Compare Password and throw error if email or password is invalid.
-56.
-57.
-58.
-59.
-60.
-61.
-62.
-63.
-64.
-65.
+56. Install Cookie-parser.
+57. Send a dummy cookie to user.
+58. create Get /ptofile API and check if you get the cookie back.
+59. install jsonwebtoken.
+60. In login Api created a JWT token.
+61. In login Api, after email and password validation, create a JWT token and send it to user.
+62. Read cookies inside the profile Api and find the logged in User.
+63. Create UserAuth Middleware.
+64. Add the userAuth middleware in profile API and to Send connectionRequest.
+65. Set the expiry of JWT token and cookies to 7day.
 66.
 67.
 68.
 69.
 70.
+71.
+72.
+73.
+74.
+75.
+76.
+77.
+78.
+79.
+80.
+81.
+82.
+83.
+84.
+85.
+86.
+87.
+88.
+89.
+90.
 
 ## Todo:
 
