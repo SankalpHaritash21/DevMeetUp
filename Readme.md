@@ -88,10 +88,10 @@ What I Did.
 72. Create routes folder for managing auth, profile, request routers.
 73. Create routers, profile, request, feed router.
 74. Import these router in app.js
-75.
-76.
-77.
-78.
+75. Created Post /logout API
+76. Created Patch /profile/edit
+77. Created Patch /profile/password ---> forget Password
+78. Validating all post Patch Apis for security
 79.
 80.
 81.

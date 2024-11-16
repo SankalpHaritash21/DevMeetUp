@@ -17,20 +17,6 @@ const getUserByEmail = async (req, res, next) => {
   }
 };
 
-const userProfile = async (req, res, next) => {
-  try {
-    const user = req?.user;
-    if (!user) {
-      throw new Error("User Not Exist");
-    }
-
-    res.send("Logged in User: " + user);
-  } catch (error) {
-    console.log(error);
-    res.status(400).send("Internal Server Error", error.message);
-  }
-};
-
 const getAllUser = async (req, res, next) => {
   try {
     const users = await User.find().sort({ createdAt: -1 });
@@ -167,7 +153,6 @@ module.exports = {
   getAllUser,
   deleteUser,
   updateUser,
-  userProfile,
   getUserByEmail,
   updateUserByEmail,
   sendConnectionRequest,

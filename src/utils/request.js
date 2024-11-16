@@ -66,4 +66,36 @@ const validateSignupData = (req) => {
   // });
 };
 
-module.exports = { validateSignupData };
+const validateEditProfileData = (req) => {
+  const allowedEditFields = [
+    "firstName",
+    "lastName",
+    "emailId",
+    "photoUrl",
+    "gender",
+    "age",
+    "about",
+    "skills",
+  ];
+
+  const isEditAllowed = Object.keys(req.body).every((key) =>
+    allowedEditFields.includes(key)
+  );
+
+  return isEditAllowed;
+};
+
+const validatePassword = (req) => {
+  const allowedEditFields = ["userId", "currentPassword", "newPassword"];
+
+  const isEditAllowed = Object.keys(req.body).every((key) =>
+    allowedEditFields.includes(key)
+  );
+
+  return isEditAllowed;
+};
+module.exports = {
+  validateSignupData,
+  validateEditProfileData,
+  validatePassword,
+};
