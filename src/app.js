@@ -15,31 +15,17 @@ const corsOptions = {
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 
-const {
-  addUser,
-  loginUser,
-  getAllUser,
-  deleteUser,
-  updateUser,
-  userProfile,
-  getUserByEmail,
-  updateUserByEmail,
-  sendConnectionRequest,
-} = require("./controller/controller");
+const authRouter = require("./routes/auth");
+const profileRouter = require("./routes/profile");
+const requestRouter = require("./routes/request");
 
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
-app.post("/signup", addUser);
-app.post("/login", loginUser);
-app.get("/getAllUser", getAllUser);
-app.get("/deleteUser", deleteUser);
-app.get("/getuser", getUserByEmail);
-app.get("/profile", userAuth, userProfile);
-app.patch("/updateUser/:userId", updateUser);
-app.patch("/updateUserByEmail", updateUserByEmail);
-app.post("/sendConnectionRequest", userAuth, sendConnectionRequest);
+app.use("/", authRouter);
+app.use("/", profileRouter);
+app.use("/", requestRouter);
 
 ConnectDB()
   .then(() => {

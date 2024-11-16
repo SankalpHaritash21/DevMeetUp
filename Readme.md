@@ -81,13 +81,13 @@ What I Did.
 65. Set the expiry of JWT token and cookies to 7day.
 66. Create userchema method to getJwt().
 67. Create userSchema method to comparePassword().
-68.
-69.
-70.
-71.
-72.
-73.
-74.
+68. Exploring Tinder and its functionallity.
+69. Create a list all Api used for Dev Tinder.
+70. Group multiple router under respective routers.
+71. Read documentation for express.Router.
+72. Create routes folder for managing auth, profile, request routers.
+73. Create routers, profile, request, feed router.
+74. Import these router in app.js
 75.
 76.
 77.
