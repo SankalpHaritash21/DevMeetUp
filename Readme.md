@@ -92,18 +92,48 @@ What I Did.
 76. Created Patch /profile/edit
 77. Created Patch /profile/password ---> forget Password
 78. Validating all post Patch Apis for security
-79.
-80.
-81.
-82.
-83.
-84.
-85.
-86.
-87.
-88.
-89.
-90.
+79. Make you validate all data in every POST, PATCH apis
+80. Create Connnection Request Schema
+81. Send Connection Request API
+82. Proper validation of Data
+83. Think about ALL corner cases
+84. $or query $and query in mongoose - https://www.mongodb.com/docs/manual/reference/operator/query-logical/
+85. schema.pre("save") function
+86. Read more about indexes in MongoDB
+87. Why do we need index in DB?
+88. What is the advantages and disadvantage of creating?
+89. Read this arcticle about compond indexes - https://www.mongodb.com/docs/manual/core/indexes/index-types/index-compound/
+90. ALWAYS THINK ABOUT CORNER CASES
+91. Why not to create useless indexing.
+92.
+93.
+94.
+95.
+96.
+97.
+98.
+99.
+100.
+101.
+102.
+103.
+104.
+105.
+106.
+107.
+108.
+109.
+110.
+111.
+112.
+113.
+114.
+115.
+116.
+117.
+118.
+119.
+120.
 
 ## Todo:
 

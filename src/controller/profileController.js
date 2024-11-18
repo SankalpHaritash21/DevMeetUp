@@ -16,7 +16,7 @@ const userProfile = async (req, res, next) => {
       throw new Error("User Not Exist");
     }
 
-    res.send("Logged in User: " + user);
+    res.status(200).send("Logged in User: " + user);
   } catch (error) {
     console.log(error);
     res.status(400).send("Internal Server Error", error.message);
