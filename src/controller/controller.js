@@ -5,29 +5,6 @@ const validator = require("validator");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
-const getUserByEmail = async (req, res, next) => {
-  const userEmail = req.body?.emailId;
-  try {
-    const users = await User.findOne({ emailId: userEmail });
-    if (!users) res.status(404).send("User Not Found");
-    res.status(200).json(users);
-  } catch (err) {
-    console.log(err);
-    res.status(500).send("Internal Server Error");
-  }
-};
-
-const getAllUser = async (req, res, next) => {
-  try {
-    const users = await User.find().sort({ createdAt: -1 });
-    if (!users) res.status(404).send("User Not Found");
-    res.status(200).json(users);
-  } catch (err) {
-    console.log(err);
-    res.status(500).send("Internal Server Error");
-  }
-};
-
 const deleteUser = async (req, res, next) => {
   console.log(req.body);
   const id = req.body?._id;
@@ -150,10 +127,9 @@ const sendConnectionRequest = async (req, res) => {
 };
 
 module.exports = {
-  getAllUser,
   deleteUser,
   updateUser,
-  getUserByEmail,
+
   updateUserByEmail,
   sendConnectionRequest,
 };
