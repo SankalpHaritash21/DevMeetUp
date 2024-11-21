@@ -7,10 +7,11 @@ const cors = require("cors");
 const PORT = process.env.PORT;
 const cookieParser = require("cookie-parser");
 const ConnectDB = require("./config/database");
-const { userAuth } = require("./middleware/auth");
+const { setResponseHeaders } = require("./middleware/auth");
 
 const corsOptions = {
-  origin: "https://example.com",
+  origin: process.env.CORS_ORIGIN,
+  credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
@@ -23,6 +24,7 @@ const getUserRouter = require("./routes/getUser");
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
+app.use(setResponseHeaders);
 
 app.use("/", authRouter);
 app.use("/", profileRouter);

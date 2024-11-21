@@ -28,4 +28,19 @@ const userAuth = async (req, res, next) => {
   }
 };
 
-module.exports = { userAuth };
+// middleware/setHeaders.js
+const setResponseHeaders = (req, res, next) => {
+  res.setHeader("Content-Security-Policy", "default-src 'self'");
+  res.setHeader(
+    "Strict-Transport-Security",
+    "max-age=31536000; includeSubDomains"
+  );
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("Referrer-Policy", "no-referrer");
+
+  req.headers["x-forwarded-for"] = "hidden";
+  res.removeHeader("X-Powered-By");
+  next();
+};
+
+module.exports = { userAuth, setResponseHeaders };

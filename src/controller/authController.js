@@ -25,7 +25,8 @@ const loginUser = async (req, res, next) => {
       res.cookie("token", token, {
         expires: new Date(Date.now() + 8 * 3600000),
       });
-      res.status(200).send("Login Successfull");
+
+      res.status(200).send(user);
     }
   } catch (err) {
     console.log(err);
