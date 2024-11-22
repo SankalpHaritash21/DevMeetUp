@@ -24,6 +24,7 @@ const userProfile = async (req, res, next) => {
 };
 
 const userEditProfile = async (req, res, next) => {
+  console.log(req.body);
   try {
     if (!validateEditProfileData(req)) {
       throw new Error("Invalid Edit Fields");
@@ -39,7 +40,7 @@ const userEditProfile = async (req, res, next) => {
       data: loggedInUser,
     });
   } catch (error) {
-    res.status(400).send("ERROR : " + err.message);
+    res.status(400).send("ERROR : " + error.message);
   }
 };
 
