@@ -82,7 +82,7 @@ const getUserFeed = async (req, res) => {
       .skip(skip)
       .limit(limit);
 
-    res.json({ data: users });
+    res.status(200).json(users);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
