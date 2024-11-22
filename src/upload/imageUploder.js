@@ -20,7 +20,10 @@ const userUploadImage = async (req, res) => {
     // Upload file to Cloudinary
     const result = await cloudinary.v2.uploader.upload(
       req.file.path,
-      { folder: "profile_pictures" },
+      {
+        folder: "profile_pictures",
+        tags: ["user_profile", "profile_picture", userId],
+      },
       (error, result) => {
         if (error) {
           console.error(error);
