@@ -32,7 +32,7 @@ const validateSignupData = (req) => {
   }
 
   // Validate `age`
-  if (!Number.isInteger(age) || age < 18) {
+  if (!Number.isInteger(parseInt(age, 10)) || parseInt(age, 10) < 18) {
     throw new Error("Age must be a valid integer and at least 18.");
   }
 

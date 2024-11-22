@@ -77,4 +77,15 @@ const userEditPassword = async (req, res, next) => {
   }
 };
 
-module.exports = { userProfile, userEditProfile, userEditPassword };
+const userEditImage = async (req, res) => {
+  try {
+  } catch (err) {
+    res.status(500).json({ message: "Failed to update profile picture", err });
+  }
+};
+module.exports = {
+  userProfile,
+  userEditProfile,
+  userEditPassword,
+  userEditImage,
+};
