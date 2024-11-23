@@ -15,7 +15,7 @@ const getUserConnections = async (req, res) => {
     }).populate("fromUserId", USER_SAFE_DATA);
     // }).populate("fromUserId", ["firstName", "lastName"]);
 
-    res.json({
+    res.status(200).json({
       message: "Data fetched successfully",
       data: connectionRequests,
     });
@@ -46,7 +46,7 @@ const getConnectedUsers = async (req, res) => {
       return row.fromUserId;
     });
 
-    res.json({ data });
+    res.status(200).json({ data });
   } catch (err) {
     res.status(400).send({ message: err.message });
   }
