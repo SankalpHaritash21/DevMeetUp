@@ -1,6 +1,7 @@
 const ConnectionRequest = require("../models/connectionRequest");
 const User = require("../models/user");
 const { ObjectId } = require("mongoose").Types;
+const mongoose = require("mongoose");
 
 const userInterested = async (req, res) => {
   try {
@@ -107,7 +108,45 @@ const reviewUserStatus = async (req, res) => {
   }
 };
 
+const removeConnection = async (req, res) => {
+  try {
+    const loggedInUser = req.user;
+    const { toUserId } = req.params;
+
+    const connectionRequest = await ConnectionRequest.findOne({
+      $or: [
+        {
+          fromUserId: loggedInUser._id,
+          toUserId: toUserId,
+        },
+        {
+          fromUserId: toUserId,
+          toUserId: loggedInUser._id,
+        },
+      ],
+      status: "accepted",
+    });
+
+    // If no connection request is found, return an error
+    if (!connectionRequest) {
+      return res
+        .status(404)
+        .json({ message: "No active connection found between users." });
+    }
+
+    // Delete the connection request (remove connection)
+    await ConnectionRequest.deleteOne({ _id: connectionRequest._id });
+
+    // Respond with a success message
+    res.status(200).json({ message: "Connection removed successfully" });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send("Internal Server Error: " + error.message);
+  }
+};
+
 module.exports = {
   userInterested,
   reviewUserStatus,
+  removeConnection,
 };

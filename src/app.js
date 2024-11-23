@@ -1,16 +1,16 @@
 console.log("Dev Tinder Backend File");
 
-require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const PORT = process.env.PORT;
+require("dotenv").config();
+const PORT = process.env.PORT || 8000;
 const cookieParser = require("cookie-parser");
 const ConnectDB = require("./config/database");
 const { setResponseHeaders } = require("./middleware/auth");
 
 const corsOptions = {
-  origin: process.env.CORS_ORIGIN,
+  origin: process.env.CORS_ORIGIN || "*",
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],

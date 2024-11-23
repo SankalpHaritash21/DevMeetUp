@@ -5,6 +5,7 @@ const validator = require("validator");
 
 const loginUser = async (req, res, next) => {
   try {
+    console.log(req.body);
     const { emailId, password } = req.body;
 
     // Validate `emailId` format
@@ -12,6 +13,7 @@ const loginUser = async (req, res, next) => {
       throw new Error("Invalid email format.");
     }
     const user = await User.findOne({ emailId });
+    console.log(user);
     if (!user) {
       throw new Error("Invalid Credentials");
     }
@@ -72,8 +74,8 @@ const signupUser = async (req, res, next) => {
       about,
       photoUrl,
     });
-    await user.save();
-    res.status(201).send("User added successfully");
+    const data = await user.save();
+    res.status(201).send(data);
   } catch (err) {
     console.log(err);
     res.status(500).send("Error:" + err.message);

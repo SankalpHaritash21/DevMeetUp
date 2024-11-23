@@ -26,9 +26,22 @@ const validateSignupData = (req) => {
     throw new Error("Invalid email format.");
   }
 
-  // Validate `password` strength
-  if (!validator.isStrongPassword(password) || !password) {
-    throw new Error("Password must be at least 6 characters long.");
+  if (
+    !password ||
+    !validator.isStrongPassword(password, {
+      minLength: 8, // Minimum length of 8
+      minLowercase: 1, // At least one lowercase letter
+      minUppercase: 1, // At least one uppercase letter
+      minNumbers: 1, // At least one number
+      minSymbols: 1, // At least one special character
+      returnScore: false, // Do not return a score; check all conditions
+    }) ||
+    !/^.*[@_].*$/.test(password) || // At least one of @ or _
+    /[^a-zA-Z0-9@_]/.test(password) // Only allow alphanumeric, @, and _
+  ) {
+    throw new Error(
+      "Password must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, one number, and one special character."
+    );
   }
 
   // Validate `age`
@@ -52,18 +65,6 @@ const validateSignupData = (req) => {
   if (new Set(skills).size !== skills.length) {
     throw new Error("Skills array must contain unique values.");
   }
-
-  // const user = new User({
-  //   firstName: firstName,
-  //   lastName: lastName,
-  //   emailId: emailId,
-  //   password: password,
-  //   age: age,
-  //   gender: gender,
-  //   skills: skills,
-  //   about: about,
-  //   photoUrl: photoUrl,
-  // });
 };
 
 const validateEditProfileData = (req) => {
